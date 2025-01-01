@@ -2,3 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
+table {
+    border-collapse: collapse;
+    border: 2px solid rgb(140 140 140);
+    width: 100%;
+    max-width: 100%;
+    table-layout: auto;
+    /*font-family: sans-serif;*/
+    /*font-size: 0.8rem;*/
+    /*color: wheat;*/
+}
+ 
+th,
+td {
+    border: 1px solid rgb(160 160 160);
+    padding: 5px 10px;
+}
+
+thead th:first-of-type,
+td:first-of-type {
+    /*background-color: rgb(210, 71, 20);*/
+    /*display: none;*/
+    width: .5rem;
+}
+
+tbody>tr:nth-of-type(even) {
+    background-color: rgb(55, 61, 72);
+}
+
+
+.sidebar {
+    @apply row-span-2 bg-gradient-to-r from-slate-700 to-slate-700 border-r border-solid border-slate-600 h-dvh;
+}
+
+.table-item {
+    @apply text-center p-2 bg-slate-600 w-full rounded hover:bg-slate-800 hover:shadow-is hover:shadow-cyan-600;
+}
