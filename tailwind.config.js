@@ -11,7 +11,9 @@ module.exports = {
       },
       boxShadow:{
         //innerSmall
-        'is': '0 0 1px 1px rgba(0,0,0,.3)' 
+        'is': '0 0 1px 1px rgba(0,0,0,.3)',
+        //innerMedium
+        'im': '0 0 4px 4px rgba(0,0,0,.3)'
       },
       height:{
         '21': '5.25rem',

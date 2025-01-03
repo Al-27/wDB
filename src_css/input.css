@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 table {
-    border-collapse: collapse;
-    border: 2px solid rgb(140 140 140);
+    /*border-collapse: collapse;*/
+    border: 2px solid theme(colors.slate.600);
     width: 100%;
     max-width: 100%;
     table-layout: auto;
@@ -15,7 +15,7 @@ table {
  
 th,
 td {
-    border: 1px solid rgb(160 160 160);
+    border: 1px solid theme(colors.slate.600);
     padding: 5px 10px;
 }
 
@@ -30,11 +30,42 @@ tbody>tr:nth-of-type(even) {
     background-color: rgb(55, 61, 72);
 }
 
+tbody tr {
+    @apply hover:bg-sky-700;
+}
 
 .sidebar {
     @apply row-span-2 bg-gradient-to-r from-slate-700 to-slate-700 border-r border-solid border-slate-600 h-dvh;
 }
 
 .table-item {
-    @apply text-center p-2 bg-slate-600 w-full rounded hover:bg-slate-800 hover:shadow-is hover:shadow-cyan-600;
+    @apply text-center p-2 bg-slate-600 w-full rounded hover:bg-slate-800 hover:shadow-is hover:shadow-cyan-600 cursor-pointer;
+}
+
+.selected {
+    @apply bg-slate-800 shadow-cyan-600 shadow-is;
+}
+
+.topbar {
+    @apply flex justify-between p-2;
+}
+
+.btn {
+    @apply h-8 pl-3 pr-6 mb-1 inline-flex items-center text-gray-100 border leading-none text-sm;
+}
+
+.btn-add {
+    @apply btn border-green-600 hover:bg-green-700;
+}
+
+.btn-edit {
+    @apply btn border-yellow-600 hover:bg-yellow-800;
+}
+
+.btn-del {
+    @apply btn border-red-600 hover:bg-red-800;
+}
+
+.inactive {
+    @apply bg-gray-500 hover:bg-gray-500 border-gray-800 text-gray-800 
 }
