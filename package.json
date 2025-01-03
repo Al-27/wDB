@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "build-tailwind" : "npx tailwindcss -i ./src_css/input.css -o ./flask_app/static/style.css --watch"
+    "w-tailwind" : "npx tailwindcss -i ./src_css/input.css -o ./flask_app/static/tailwind.css --watch",
+    "debug-server"   : "flask --app ./flask_app/app run --debug"
   },
   "dependencies": {
     "tailwindcss": "^3.4.17"

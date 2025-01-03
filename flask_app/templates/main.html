@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>wDB Editor - {{title}} </title>
-        <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
-    </head>
-    <body >
-    </body>
+
+<head>
+    <title>wDB Editor - {{title}} </title>
+    <link rel="stylesheet" href="{{url_for('static',filename='tailwind.css')}}">
+</head>
+
+<body class="text-gray-200 bg-slate-800 h-lvh">
+
+    <div class="grid grid-rows-wdb2 grid-cols-wdb2 justify-stretch h-dvh">
+        {% include 'editor.html' ignore missing %}
+    </div>
+
+</body>
+
 </html>
