@@ -66,7 +66,7 @@ class DBEngine():
 
     def new_table(self, **table):
         """
-        {table_name: [{colname: str, type: str, nullable: bool, pk: bool, unique: bool}]
+        {table_name: [{colname: str, type: str, nullable: bool, pk: bool, unique: bool}]}
         """
         tbl_n, tbl_d = list(table.keys())[0], list(table.values())[0]
         nTable = self.__creator.create_table(tbl_n,tbl_d)
@@ -77,7 +77,7 @@ class DBEngine():
         table_r = self.__metadata.tables[table]
         table_r.drop(self.__engine)
 
-    def add_row(self, row_data: dict):
+    def insert(self, row_data: dict):
         if row_data and not row_data == {}:
             con = self.__engine.connect()
             st = self.cur_Table.insert().values(**row_data)
