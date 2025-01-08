@@ -1,9 +1,10 @@
 from sqlalchemy import Column, String, Integer, Float, Boolean, \
                         DateTime, Date, Time, MetaData, Table ,\
-                        create_engine, Engine, make_url, URL
+                        create_engine, Engine, make_url, URL, \
+                        Connection
 import json
 
-class DataBaseCreator:
+class TableEngine:
     types = {
 	'str': String,
 	'int': Integer,
@@ -36,9 +37,29 @@ class DataBaseCreator:
                                     primary_key=column['pk'], unique=column['unique']))
         return cols
 
+    
+    def insert(self, conn, table: Table, row_data: dict):
+        if row_data and not row_data == {}:
+            st = table.insert().values(**row_data)
+            conn.execute(st) 
+            conn.commit()
+    
+    def select(self,conn: Connection, table: Table, all: bool=False):
+        """
+        @all: get all rows, (def: get first)
+        TODO: create a func in utils to convert rows to list, to be 'jsonable'
+        """
+        stmt = table.select()
+        res = conn.execute(stmt).all()
+        if not all:
+            res = res[0]
+        conn.commit()
+        return res
+
+
 
 class DBEngine():
-    __creator: DataBaseCreator= None
+    __tableE: TableEngine= None
     __engine: Engine = None
     __metadata: MetaData = None
     cur_Table: Table = None
@@ -49,9 +70,21 @@ class DBEngine():
         self.__metadata = MetaData()
         #reflect to get all existing tables within db_e
         self.__metadata.reflect(bind=self.__engine)
-        self.__creator = DataBaseCreator(self.__metadata)
+        self.__tableE = TableEngine(self.__metadata)
+
+    def new_table(self, **table):
+        """
+        {table_name: [{colname: str, type: str, nullable: bool, pk: bool, unique: bool}]}
+        """
+        tbl_n, tbl_d = list(table.keys())[0], list(table.values())[0]
+        self.cur_Table = self.__tableE.create_table(tbl_n,tbl_d)
+        self.cur_Table.create(self.__engine,True)
+
+    def drop_table(self, table: str):
+        table_r = self.__metadata.tables[table]
+        table_r.drop(self.__engine)
     
-    def get_tables(self):
+    def get_tables_schema(self):
         """
         [{ tab_name : str, cols: [...{colname: str, type: str, nullable: bool, pk: bool, unique: bool} ] }]
         """ 
@@ -64,30 +97,34 @@ class DBEngine():
                                            'pk': col.primary_key, 'unique': col.unique} )
         return json.dumps(tables_data)
 
-    def new_table(self, **table):
+    def get_table_data(self):
         """
-        {table_name: [{colname: str, type: str, nullable: bool, pk: bool, unique: bool}]}
+        --> [{ tab_name : [...{col_1,col_2...,col_n} ] }]
         """
-        tbl_n, tbl_d = list(table.keys())[0], list(table.values())[0]
-        nTable = self.__creator.create_table(tbl_n,tbl_d)
-        nTable.create(self.__engine,True)
-        self.cur_Table = nTable
+        if self.cur_Table:
+            pass
+            
 
-    def drop_table(self, table: str):
-        table_r = self.__metadata.tables[table]
-        table_r.drop(self.__engine)
-
-    def insert(self, row_data: dict):
+    def add_row(self, row_data: dict, table_n: str=None):
         if row_data and not row_data == {}:
             con = self.__engine.connect()
-            st = self.cur_Table.insert().values(**row_data)
-            con.execute(st) 
-            con.commit()
+            table = self.cur_Table
+            
+            if table_n:
+                table = self.__metadata.tables[table_n]
+                
+            self.__tableE.insert(con, table, row_data)
             con.close()
     
-    def select(self, stmt):
+    def get_row(self, table_n: str=None):
+        """
+        """
         con = self.__engine.connect()
-        res = con.execute(stmt) 
-        con.commit()
+        table = self.cur_Table
+            
+        if table_n != None :
+            table = self.__metadata.tables[table_n]
+            
+        res = self.__tableE.select(con, table)
         con.close()
         return res
