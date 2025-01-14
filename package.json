@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "w-tailwind" : "npx tailwindcss -i ./src_css/input.css -o ./flask_app/static/tailwind.css --watch",
+    "w-tailwind" : "npx tailwindcss -i ./src_css/input.css -o ./flask_app/static/css/tailwind.css --watch",
     "debug-server"   : "flask --app ./flask_app/app run --debug"
   },
   "dependencies": {
