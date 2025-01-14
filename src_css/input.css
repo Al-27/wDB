@@ -21,8 +21,7 @@ td {
 
 thead th:first-of-type,
 td:first-of-type {
-    /*background-color: rgb(210, 71, 20);*/
-    /*display: none;*/
+    background-color: theme(colors.slate.950);
     width: .5rem;
 }
 

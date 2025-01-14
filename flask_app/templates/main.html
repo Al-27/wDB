@@ -3,7 +3,8 @@
 
 <head>
     <title>wDB Editor - {{title}} </title>
-    <link rel="stylesheet" href="{{url_for('static',filename='tailwind.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/tailwind.css')}}">
+    <script src="{{url_for('static',filename='js/jquery-3.7.1.min.js')}}"></script>
 </head>
 
 <body class="text-gray-200 bg-slate-800 h-lvh">
@@ -12,6 +13,7 @@
         {% include 'editor.html' ignore missing %}
     </div>
 
+    <script src="{{ url_for('static', filename='js/indx.js') }}"></script>
 </body>
 
 </html>
