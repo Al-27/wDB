@@ -1,0 +1,112 @@
+<dialog id="new_table"
+    style="color: white; position: fixed;top: 25dvh;width: 45dvw;height: 70dvh;background: #5a6e8c;">
+    
+    <div style="width: 100dvw;position: fixed;background: #000;z-index: 1;left: 0;top: 0;opacity: .5;display: inline;"
+        class=" h-dvh"></div>
+    <button
+        style="position: relative;top: 5px;z-index: 3;max-width: 9rem;left: 80%;text-align: center;justify-content: center;"
+        class="btn-add" onclick="create_table()">Create</button>
+    <button class="btn-del"
+        style="position: relative;top: 5px;z-index: 3;/*! width: 38%; */padding-right: 1rem;left: 81%;text-align: center;justify-content: center;"
+        onclick="document.querySelector('#new_table').close()">Close</button>
+    <div class="table_name" style="position: relative;bottom: 33px;background: #367740;padding: 0.5rem 2rem;border-radius: 10px 10px 0px 0px;z-index: 1;width: 40%;max-width: 10rem;left: 3px;"
+        contenteditable="true"> table_name 
+    </div>
+    <div style="position: relative;overflow: auto;bottom: 36px;">
+
+        <div style="margin: 0.2rem;background: #1c1c1c;z-index: 4;/*! bottom: 35px; */position: relative;">
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Column Name</th>
+                        <th>Type</th>
+                        <th>Primary Key</th>
+                        <th>Nullable</th>
+                        <th>Unique</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr style="pointer-events: none;opacity: .7;">
+                        <td>
+                            <input disabled="" value="id">
+                        </td>
+                        <td>
+                            <input value="Integer" style="width: 10dvw;">
+                        </td>
+                        <td>
+                            <input type="checkbox" checked="">
+                        </td>
+                        <td>
+                            <input type="checkbox">
+                        </td>
+                        <td>
+                            <input type="checkbox">
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <input>
+                        </td>
+                        <td>
+                            <select style="padding: 1px 5px;width: 8dvw;">
+                                <option>String</option>
+                                <option>Integer</option>
+                                <option>Float</option>
+                                <option>Boolean</option>
+                                <option>DateTime</option>
+                                <option>Date</option>
+                                <option>Time</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="checkbox" disabled="">
+                        </td>
+                        <td>
+                            <input type="checkbox">
+                        </td>
+                        <td>
+                            <input type="checkbox">
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <button class="btn-add" style="padding: 0rem 0.4rem 0 0.3rem;margin: 0;height: 1.5rem;"
+                onclick="document.querySelector('#new_table tbody').appendChild(document.querySelector('#new_table template').content.cloneNode(true))">+</button><button
+                style="padding: 0rem 0.5rem;margin: 0 10px;height: 1.5rem;" class="btn-del"
+                onclick="tpop_column()">-</button>
+        </div>
+    </div> 
+    
+    <template>
+        <tr>
+            <td>
+                <input>
+            </td>
+            <td>
+                <select style="padding: 1px 5px;width: 10dvw;">
+                    <option>String</option>
+                    <option>Integer</option>
+                    <option>Float</option>
+                    <option>Boolean</option>
+                    <option>DateTime</option>
+                    <option>Date</option>
+                    <option>Time</option>
+                </select>
+            </td>
+            <td>
+                <input type="checkbox" disabled="">
+            </td>
+            <td>
+                <input type="checkbox" checked>
+            </td>
+            <td>
+                <input type="checkbox">
+            </td>
+        </tr>
+    </template>
+</dialog>
