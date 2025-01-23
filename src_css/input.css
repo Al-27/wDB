@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+input, select {
+  background: #4a4a4a;
+  color: #fff;
+  padding: 1px 5px;
+}
+
 table {
     /*border-collapse: collapse;*/
     border: 2px solid theme(colors.slate.600);
@@ -23,6 +31,11 @@ thead th:first-of-type,
 td:first-of-type {
     background-color: theme(colors.slate.950);
     width: .5rem;
+}
+
+dialog th:first-of-type, dialog td:first-of-type
+{
+    background: inherit !important;
 }
 
 tbody>tr:nth-of-type(even) {
@@ -50,7 +63,7 @@ tbody tr {
 }
 
 .btn {
-    @apply h-8 pl-3 pr-6 mb-1 inline-flex items-center text-gray-100 border leading-none text-sm;
+    @apply h-8 pl-3 pr-3 mb-1 inline-flex items-center text-gray-100 border leading-none text-sm;
 }
 
 .btn-add {
