@@ -1,5 +1,6 @@
 from flask import make_response, abort, jsonify, request
-from . import db_e, api_b
+from . import api_b
+from db import db_e
 from db.utils import to_obj, rows_to_list
 from flask import Blueprint
 
@@ -16,3 +17,4 @@ def select_table(table_name):
 def add_table(data):
     obj = to_obj(data)
     db_e.new_table(**obj)
+    return jsonify({'res':'ok'})
