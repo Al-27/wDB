@@ -8,13 +8,13 @@
     </span>
   </div>
   <div class="flex justify-center">
-    <button class="btn-add text-xs mr-1 !mb-0 !pr-5 !pl-2 ">New Table</button>
-    <button class="btn-del !mb-0 !pr-5 !pl-2  ">Delete All</button>
+    <button class="btn-add text-xs mr-1 !mb-0 !pr-5 !pl-2" onclick="show_dialog('new_table')">New Table</button>
+    <button class="btn-del !mb-0 !pr-5 !pl-2 " onclick="delete_all()">Delete All</button>
   </div>
-  <div id='tab_template'  data-tab_name=""  class="margin-2 p-1 grid auto-rows-max grid-cols-1 gap-1 box-border hidden">
+  <div id='tab_template' data-tab_name="" class="margin-2 p-1 grid auto-rows-max grid-cols-1 gap-1 box-border hidden">
     <!-- 
       should be in its own file, as it will be needed to be served dynamically 
-      or make it hidden, and duplicate (cloneNode()) when needed
+      or make it hidden, and duplicate (using cloneNode()) when needed
     -->
     <div class="table-item flex items-center">
       <div>
@@ -79,3 +79,24 @@
     </tbody>
   </table>
 </div>
+<dialog style="color: white; position: fixed;" id="loading">
+  <div style="width: 100dvw;position: fixed;background: #000;z-index: 1;left: 0;top: 0;opacity: .5;display: inline;"
+    class=" h-dvh"></div>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"
+    style="width: 100px;top: 40%;left: 44%;position: fixed;/*! color: red; */">
+    <radialGradient id="a11" cx=".66" fx=".66" cy=".3125" fy=".3125" gradientTransform="scale(1.5)">
+      <stop offset="0" stop-color="#6CE0E7"></stop>
+      <stop offset=".3" stop-opacity=".9" stop-color="#6CE0E7"></stop>
+      <stop offset=".6" stop-opacity=".6" stop-color="#6CE0E7"></stop>
+      <stop offset=".8" stop-opacity=".3" stop-color="#6CE0E7"></stop>
+      <stop offset="1" stop-opacity="0" stop-color="#6CE0E7"></stop>
+    </radialGradient>
+    <circle transform-origin="center" fill="none" stroke="url(#a11)" stroke-width="18" stroke-linecap="round"
+      stroke-dasharray="200 1000" stroke-dashoffset="0" cx="100" cy="100" r="70">
+      <animateTransform type="rotate" attributeName="transform" calcMode="spline" dur="2" values="360;0" keyTimes="0;1"
+        keySplines="0 0 1 1" repeatCount="indefinite"></animateTransform>
+    </circle>
+    <circle transform-origin="center" fill="none" opacity=".2" stroke="#69DAE0" stroke-width="18" stroke-linecap="round"
+      cx="100" cy="100" r="70"></circle>
+  </svg>
+</dialog>
