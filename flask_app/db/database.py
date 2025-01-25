@@ -28,9 +28,15 @@ class TableEngine:
         cols = self.init_cols(col_data)
         return Table(table_name, self.__metadata, *cols)
     
-    def drop(self, table_nm: str, engine: Engine):
-        table_r = self.__metadata.tables[table_nm]
-        table_r.drop(engine)
+    def drop(self, engine: Engine, table_nm: str=None):
+        if table_nm:
+            print(table_nm)
+            table_r = self.__metadata.tables[table_nm]
+            table_r.drop(engine)
+            return
+        self.__metadata.drop_all(engine)
+        
+
 
     def get_tables(self):
         return self.__metadata.tables
@@ -88,13 +94,15 @@ class DBEngine():
         self.cur_Table = self.__tableE.create_table(tbl_n,tbl_d)
         self.cur_Table.create(self.__engine,True)
 
-    def drop_table(self, table: str):
-        table_r = self.__tableE.drop(table, self.__engine)
-        table_r.drop(self.__engine)
+    def drop_table(self, table: str=None):
+        """
+            if no table name is provided drop all
+        """
+        self.__tableE.drop(self.__engine, table)
     
     def get_tables_schema(self):
         """
-        { tabl_name : {tabl_name : str, cols: [...{colname: str, type: str, nullable: bool, pk: bool, unique: bool} ] }}
+        { table_name : {tabl_name : str, cols: [...{colname: str, type: str, nullable: bool, pk: bool, unique: bool} ] }}
         """ 
         tables_data = {}
         for tab_n, table in self.__tableE.get_tables().items():
