@@ -9,9 +9,9 @@
   </div>
   <div class="flex justify-center">
     <button class="btn-add text-xs mr-1 !mb-0 !pr-5 !pl-2" onclick="show_dialog('new_table')">New Table</button>
-    <button class="btn-del !mb-0 !pr-5 !pl-2 " onclick="delete_all()">Delete All</button>
+    <button class="btn-del !mb-0 !pr-5 !pl-2 " onclick="delete_table()">Delete All</button>
   </div>
-  <div id='tab_template' data-tab_name="" class="margin-2 p-1 grid auto-rows-max grid-cols-1 gap-1 box-border hidden">
+  <div id='tab_template' class="margin-2 p-1 grid auto-rows-max grid-cols-1 gap-1 box-border hidden">
     <!-- 
       should be in its own file, as it will be needed to be served dynamically 
       or make it hidden, and duplicate (using cloneNode()) when needed
@@ -24,7 +24,7 @@
             d="M12 7.205c4.418 0 8-1.165 8-2.602C20 3.165 16.418 2 12 2S4 3.165 4 4.603c0 1.437 3.582 2.602 8 2.602ZM12 22c4.963 0 8-1.686 8-2.603v-4.404c-.052.032-.112.06-.165.09a7.75 7.75 0 0 1-.745.387c-.193.088-.394.173-.6.253-.063.024-.124.05-.189.073a18.934 18.934 0 0 1-6.3.998c-2.135.027-4.26-.31-6.3-.998-.065-.024-.126-.05-.189-.073a10.143 10.143 0 0 1-.852-.373 7.75 7.75 0 0 1-.493-.267c-.053-.03-.113-.058-.165-.09v4.404C4 20.315 7.037 22 12 22Zm7.09-13.928a9.91 9.91 0 0 1-.6.253c-.063.025-.124.05-.189.074a18.935 18.935 0 0 1-6.3.998c-2.135.027-4.26-.31-6.3-.998-.065-.024-.126-.05-.189-.074a10.163 10.163 0 0 1-.852-.372 7.816 7.816 0 0 1-.493-.268c-.055-.03-.115-.058-.167-.09V12c0 .917 3.037 2.603 8 2.603s8-1.686 8-2.603V7.596c-.052.031-.112.059-.165.09a7.816 7.816 0 0 1-.745.386Z" />
         </svg>
       </div>
-      <div id="table_name" class="flex-grow text-left ml-1"></div>
+      <div class="table_name flex-grow text-left ml-1"></div>
       <div class="flex flex-col">
         <button>
           <svg class="w-4 h-4 text-gray-800 dark:text-yellow-500 hover:shadow-is hover:shadow-yellow-500"
@@ -38,7 +38,7 @@
               clip-rule="evenodd" />
           </svg>
         </button>
-        <button>
+        <button onclick="delete_table(this.parentElement)">
           <svg class="w-4 h-4 text-gray-800 dark:text-red-600 hover:shadow-is hover:shadow-red-600 " aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
             <path fill-rule="evenodd"
@@ -59,7 +59,7 @@
   </div>
   <!-- TODO: add an icon to each button, to signify each button's action. -->
   <div class="flex flex-col px-8">
-    <button class="btn-add">New Row</button>
+    <button class="btn-add" onclick="show_dialog('new_rows')">New Row</button>
     <!-- TODO: Enable when a row is selected -->
     <button class="btn-edit inactive" disabled>Edit</button>
     <button class="btn-del inactive" disabled>Delete</button>
